@@ -1,31 +1,29 @@
 /* ******************************************
- * server.js
- * Primary file of the application
+ * Primary server file
  ******************************************/
 
-/* ***********************
- * Require Statements
- *************************/
 const express = require("express")
 require("dotenv").config()
 
 const app = express()
+
+// Import static routes
 const staticRoutes = require("./routes/static")
 
-/* ***********************
- * Routes
- *************************/
-app.use("/", staticRoutes)
+// View engine
+app.set("view engine", "ejs")
 
-/* ***********************
- * Local Server Information
- *************************/
+// Use static routes
+app.use(staticRoutes)
+
+// Index Route
+app.get("/", function (req, res) {
+  res.render("index", { title: "Home" })
+})
+
+// Server
 const port = process.env.PORT || 5500
-const host = process.env.HOST || "localhost"
 
-/* ***********************
- * Log statement to confirm server operation
- *************************/
 app.listen(port, () => {
-  console.log(`App listening at http://${host}:${port}`)
+  console.log(`Server running on port ${port}`)
 })

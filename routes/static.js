@@ -1,12 +1,10 @@
 const express = require("express")
 const router = express.Router()
 
-// Serve static files from the public folder
+// Static Routes
 router.use(express.static("public"))
-
-// Home route
-router.get("/", (req, res) => {
-  res.render("index")
-})
+router.use("/css", express.static("public/css"))
+router.use("/js", express.static("public/js"))
+router.use("/images", express.static("public/images"))
 
 module.exports = router
